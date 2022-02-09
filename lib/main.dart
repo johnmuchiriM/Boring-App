@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_api_project/home/home.dart';
 import 'package:sample_api_project/services/boredService.dart';
+import 'package:sample_api_project/services/connectivityService.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,9 +18,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MultiRepositoryProvider(
-          providers: [RepositoryProvider(create: (context) => BoredService())],
-          child: HomePage()),
+      home: MultiRepositoryProvider(providers: [
+        RepositoryProvider(create: (context) => BoredService()),
+        RepositoryProvider(create: (context) => ConnectivityService())
+      ], child: const HomePage()),
     );
   }
 }

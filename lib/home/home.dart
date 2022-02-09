@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_api_project/home/bloc/bloc/home_bloc.dart';
 import 'package:sample_api_project/services/boredService.dart';
+import 'package:sample_api_project/services/connectivityService.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,9 +10,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          HomeBloc(RepositoryProvider.of<BoredService>(context))
-            ..add(LoadApiEvent()),
+      create: (context) => HomeBloc(
+          RepositoryProvider.of<BoredService>(context),
+          RepositoryProvider.of<ConnectivityService>(context))
+        ..add(LoadApiEvent()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("How bored people chill out"),
@@ -32,7 +34,7 @@ class HomePage extends StatelessWidget {
                     Text(state.activityType),
                     Text(state.participants.toString()),
                     const SizedBox(
-                      height: 15,
+                      height: 20,
                     ),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.black),
@@ -45,6 +47,9 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               );
+            }
+            if (state is HomeNoInternetState) {
+              return const Center(child: Text("No Internet"));
             }
             return Container();
           },

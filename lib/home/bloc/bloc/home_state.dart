@@ -20,3 +20,9 @@ class HomeLoadedState extends HomeState {
   // TODO: implement props
   List<Object?> get props => [activityName, activityType, participants];
 }
+
+class HomeNoInternetState extends HomeState {
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
