@@ -24,12 +24,26 @@ class HomePage extends StatelessWidget {
               );
             }
             if (state is HomeLoadedState) {
-              return Column(
-                children: [
-                  Text(state.activityName),
-                  Text(state.activityType),
-                  Text(state.participants.toString()),
-                ],
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(state.activityName),
+                    Text(state.activityType),
+                    Text(state.participants.toString()),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.black),
+                        onPressed: () => BlocProvider.of<HomeBloc>(context)
+                            .add(LoadApiEvent()),
+                        child: const Text(
+                          "Next",
+                          style: TextStyle(color: Colors.white),
+                        )),
+                  ],
+                ),
               );
             }
             return Container();

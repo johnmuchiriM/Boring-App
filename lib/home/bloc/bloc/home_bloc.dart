@@ -9,7 +9,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final BoredService _boredService;
   HomeBloc(this._boredService) : super(HomeLoadingState()) {
     on<LoadApiEvent>((event, emit) async {
+      emit(HomeLoadingState());
       final activity = await _boredService.getBoredActivity();
+
+      emit(HomeLoadedState(
+          activity.activity, activity.type, activity.participants));
     });
   }
 }

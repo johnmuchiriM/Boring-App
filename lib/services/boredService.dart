@@ -24,11 +24,11 @@ class BoredActivity {
 
   String activity;
   String type;
-  int participants;
-  int price;
+  num participants;
+  num price;
   String link;
   String key;
-  int accessibility;
+  num accessibility;
 
   factory BoredActivity.fromJson(Map<String, dynamic> json) => BoredActivity(
         activity: json["activity"],
